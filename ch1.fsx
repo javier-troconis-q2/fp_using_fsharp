@@ -88,9 +88,8 @@ let reverse_tail l =
         | h :: t -> reverse_tail' t (h::a)
     reverse_tail' l []
 
-let rec gdc x y =
-    match x % y with
-    | 0 -> y
-    | z -> gdc y z        
+let rec gdc x = function
+    | 0 -> x
+    | y -> gdc1 y (x % y)
 
 List.fold gdc 0 [88; 120; 240]
