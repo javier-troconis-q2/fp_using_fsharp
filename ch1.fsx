@@ -1,30 +1,31 @@
 //1.1
 let g n = n + 4
+
 //1.2
 let h (x, y) = System.Math.Sqrt(x * x + y * y)
 
 //1.3
 //g = int -> int
 //h = float * float -> float
+
 //1.4
 let rec f = 
     function 
     | 0 -> 0
     | n -> n + f (n - 1)
 
-let f_tail n = 
-    let rec f_tail = 
+let f1 n = 
+    let rec f1 = 
         function 
         | (0, y) -> y
-        | (x, y) -> f_tail (x - 1, y + 1)
-    f_tail (n, n)
+        | (x, y) -> f1 (x - 1, y + 1)
+    f1 (n, n)
 
 //1.5
 let rec fib = 
     function 
-    | 0 -> 0
-    | 1 -> 1
-    | n -> fib (n - 1) + fib (n - 2)
+    | 0 | 1 as x -> x
+    | x -> fib (x - 1) + fib (x - 2)
 
 //1.6
 let rec sum = 
@@ -40,13 +41,15 @@ let sum_tail (m, n) =
     sum_tail (m, n)
 
 //1.7
-// (System.Math.PI, fact -1) = float * int
-// fact(fact 4) = int
-// power(System.Math.PI, fact 2) = float
-// (power, fact) = float -> int -> float * int -> int
+// (System.Math.PI, fact -1) : float * int
+// fact(fact 4) : int
+// power(System.Math.PI, fact 2) : float
+// (power, fact) : float -> int -> float * int -> int
 //1.8
 //f 3 = 4
 //g 3 = 9
+
+
 let rec alt_sum = 
     function 
     | [] -> 0
@@ -88,8 +91,9 @@ let reverse_tail l =
         | h :: t -> reverse_tail' t (h::a)
     reverse_tail' l []
 
-let rec gdc x = function
+let rec gdc x = 
+    function
     | 0 -> x
-    | y -> gdc1 y (x % y)
+    | y -> gdc y (x % y)
 
 List.fold gdc 0 [88; 120; 240]
