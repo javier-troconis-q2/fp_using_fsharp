@@ -74,11 +74,6 @@ let rec foldr (f : 'a -> 'b -> 'b) (s : 'b) (l : 'a list) : 'b =
     | [] -> s
     | h :: t -> f h (foldr f s t)
 
-let rec gcd (x, y) = 
-    match x % y with
-    | 0 -> y
-    | z -> gcd (y, z)
-
 let rec reverse = 
     function 
     | [] -> []
@@ -92,3 +87,10 @@ let reverse_tail l =
         | [] -> a
         | h :: t -> reverse_tail' t (h::a)
     reverse_tail' l []
+
+let rec gdc x y =
+    match x % y with
+    | 0 -> y
+    | z -> gdc y z        
+
+List.fold gdc 0 [88; 120; 240]
