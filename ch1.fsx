@@ -97,3 +97,6 @@ let rec gdc x =
     | y -> gdc y (x % y)
 
 List.fold gdc 0 [88; 120; 240]
+
+
+

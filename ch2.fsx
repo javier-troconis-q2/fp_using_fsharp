@@ -1,17 +1,30 @@
+open System.ComponentModel
+open System.Runtime.InteropServices
 //2.1
-let k n = n % 2 = 0 || n % 3 = 0
-//2.2
-let (+.) x y : System.String = x + y
+let f n = n % 2 = 0 || n % 3 = 0 && n % 5 <> 0
 
-let rec pow = 
-    function 
-    | (s, 1) -> s
-    | (s, n) -> pow (s + s, n - 1)
+//2.2
+let (+.) x y : string = x + y
+
+let f (x, y) = 
+    let rec f = function
+        | (y, 0) -> y
+        | (y, z) -> f (y +. x, z - 1)
+    f ("", y)
+
+let f (x, y) = Seq.fold (fun s _ -> s +. x) "" {1..y}
 
 //2.3
-let isIthChar (str : System.String, i, ch) = str.[i] = ch
+let isIthChar (str : string, i, ch) = str.[i] = ch
 
-//2.4 ??
+//2.4
+let occFromIth (str : string, i, ch) = 
+    if (i >= String.length str) then 0
+    else
+        Seq.skip i str
+        |> Seq.filter (fun x -> x = ch)
+        |> Seq.length
+
 //2.5
 let occInString (str, ch) = 
     str
@@ -20,6 +33,14 @@ let occInString (str, ch) =
 
 //2.6
 let notDivisibleBy (d, n) = n % d <> 0
+
+//2.7.1
+let test a b c = 
+    b >= a 
+    && notDivisibleBy (a, c) 
+    && notDivisibleBy (a + 1, c) 
+    && notDivisibleBy (b, c) 
+
 
 let rec gcd = 
     function 
